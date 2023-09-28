@@ -30,7 +30,7 @@ Paste your Corbado project ID in the applications.properties file.
 
 ## Usage
 
-Then you can run the project locally by executing the following command inside the `/complete` folder:
+Then you can run the project locally by executing the following command:
 
 ```bash
 npm install && npm run dev
