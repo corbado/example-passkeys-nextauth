@@ -1,8 +1,12 @@
+
+'use client';
 import type { GetServerSidePropsContext, InferGetServerSidePropsType, NextApiRequest, NextApiResponse } from "next";
 import { getProviders, signIn } from "next-auth/react"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useCallback, useEffect, useState } from "react";
+
+import '@corbado/webcomponent/pkg/auth_cui.css'
 
 const PASSKEY_LOGIN_SUCCESSFUL = "PASSKEY_LOGIN_SUCCESSFUL"
 const PASSKEY_LOGIN_FAILED = "PASSKEY_LOGIN_FAILED"
@@ -46,6 +50,7 @@ export default function SignIn(
 
     useEffect(() => {
       // This will run only on client-side
+      
       import('@corbado/webcomponent')
           .then(module => {
               const Corbado = module.default || module;
@@ -89,25 +94,44 @@ export default function SignIn(
 
   return (
     <>
-          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></link>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></link>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <div className="d-flex justify-content-around m-2">
-      <div>
+    <div className="parent">
+      <div className="buttons">
       {providersNew.map((provider) => (
         <div key={provider.name} >
-          <button className="btn btn-primary m-1" onClick={() => signIn(provider.id)}>
+          <button className="btn btn-primary button" onClick={() => signIn(provider.id)}>
             Sign in with {provider.name}
           </button>
         </div>
       ))}
       </div>
-      <div className="ms-2">
+      <div>
         <corbado-auth project-id="pro-2808756695548043260" conditional="yes">
           <input name="username" id="corbado-username"
           required autoComplete="webauthn"/>
         </corbado-auth>
       </div>
       </div>
+      <style jsx>{`
+        .parent {
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+          align-items: center;
+
+        }
+
+        .button{
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          display: block;
+          border-radius: 30px;
+          background-color: #1853FE;
+        }
+      `}</style>
     </>
   )
 }
