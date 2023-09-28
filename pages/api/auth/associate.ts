@@ -11,14 +11,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
  
-
-console.log("Project ID: ", projectID);
-console.log("API Secret: ", apiSecret);
 const config = new Corbado.Configuration(projectID, apiSecret);
 const corbado = new Corbado.SDK(config);
 
     const {loginIdentifier, loginIdentifierType} = req.body;
-//    const clientInfo = corbado.utils.getClientInfo(req);
 
     try {
         // use the Corbado SDK to create the association token
@@ -28,12 +24,7 @@ const corbado = new Corbado.SDK(config);
             userAgent: req.headers['user-agent'],
         });
 
-        console.log("Response from Corbado is here");
-        console.log(associationToken);  
-
         if (associationToken?.data?.token) {
-            console.log("Sending token to client");
-            console.log("Token: ", associationToken.data.token);
             return res.status(200).send(associationToken.data.token);
         } else {
             return res.status(200).send({error: 'error_creating_association_token'});

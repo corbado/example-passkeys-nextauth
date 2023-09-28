@@ -37,12 +37,9 @@ export const authOptions: NextAuthOptions = {
       name: 'webauthn',
       credentials: {},
       async authorize(cred, req) {
-        console.log("Credentials: ", cred);
-
         if(cred.provider !== "corbado") return null;
 
         var cbo_short_session = req.headers.cookie.split("; ").find(row => row.startsWith("cbo_short_session"));
-        console.log("CBO Short Session: ", cbo_short_session);
         var token = cbo_short_session.split("=")[1];
         var issuer = "https://" + projectID + ".frontendapi.corbado.io";
         var jwksUrl = issuer + "/.well-known/jwks"; 
@@ -53,14 +50,9 @@ export const authOptions: NextAuthOptions = {
         const options = {
             issuer: issuer,
         }
-
         try {
             const {payload} = await jose.jwtVerify(token, JWKS, options)
             if (payload.iss === issuer) {
-              console.log("issuerValid!")
-              console.log(payload);
-              console.log("Returning...")
-
               //Load data from database
               return { email: payload.email, name: payload.name, image: null};
             }else{
