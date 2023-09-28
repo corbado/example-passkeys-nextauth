@@ -102,15 +102,26 @@ export default function IndexPage()  {
       )}
       {session?.user && !hasPasskey &&(
         <>
+        
             {!associationToken && 
             <button onClick={handleButtonClick}>Add passkey to my account</button>
             }
             {associationToken && !hasPasskey && 
-                    <corbado-passkey-associate
+                    <div className="associate-container"><corbado-passkey-associate
                         project-id="pro-2808756695548043260"
                         association-token={associationToken}
                         ref={setRef}
-                    />}
+                    />
+                    </div>}
+                    <style jsx>{`
+        .associate-container {
+          width: 200px;
+          margin-left: auto;
+          margin-right: auto;
+          align-items: center;
+
+        }
+      `}</style>
           </>
             )}
         {session?.user && hasPasskey && (
