@@ -26,7 +26,7 @@ This is a sample implementation of a NextAuth.js application that offers passkey
 Please follow the steps in [Getting started](https://docs.corbado.com/overview/getting-started) to create and configure
 a project in the [Corbado developer panel](https://app.corbado.com/signin#register).
 
-Paste your Corbado project ID in the applications.properties file.
+Create a .env.local file and paste your Corbado project ID in there as well as credentials for at least one OAuth provider as shown in .env.local.
 
 ## Usage
 
