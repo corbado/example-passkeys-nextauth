@@ -1,5 +1,6 @@
 // This is an example of how to access a session from an API route
 
+// brauchen wir die ganzen Examples dateien?
 import { auth } from "auth"
 import type { NextApiRequest, NextApiResponse } from "next"
 

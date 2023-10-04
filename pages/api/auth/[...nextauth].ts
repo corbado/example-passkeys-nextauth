@@ -11,6 +11,8 @@ const projectID = process.env.CORBADO_PROJECT_ID;
 
 export const authOptions: NextAuthOptions = {
   // https://next-auth.js.org/configuration/providers/oauth
+
+  // kannst du mir ggf.
   providers: [
     FacebookProvider({
       clientId: process.env.FACEBOOK_ID,
@@ -39,6 +41,8 @@ export const authOptions: NextAuthOptions = {
       async authorize(cred, req) {
         if(cred.provider !== "corbado") return null;
 
+        // das ist aus dem Node.js SDK rauskopiert oder?
+        // weil ggf. kurze Erklärung in den Comments, was hier passiert gut wäre
         var cbo_short_session = req.headers.cookie.split("; ").find(row => row.startsWith("cbo_short_session"));
         var token = cbo_short_session.split("=")[1];
         var issuer = "https://" + projectID + ".frontendapi.corbado.io";
@@ -54,6 +58,7 @@ export const authOptions: NextAuthOptions = {
             const {payload} = await jose.jwtVerify(token, JWKS, options)
             if (payload.iss === issuer) {
               //Load data from database
+              // Von der User database right?
               return { email: payload.email, name: payload.name, image: null};
             }else{
               console.log("issuer not valid")
