@@ -11,6 +11,8 @@ const projectID = process.env.CORBADO_PROJECT_ID;
 
 export const authOptions: NextAuthOptions = {
   // https://next-auth.js.org/configuration/providers/oauth
+
+  // kannst du mir ggf.
   providers: [
     FacebookProvider({
       clientId: process.env.FACEBOOK_ID,
