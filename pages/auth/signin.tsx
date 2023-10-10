@@ -29,11 +29,10 @@ export default function SignIn(
           .then(module => {
               const Corbado = module.default || module;
 
-              console.log("Initializing Corbado session")
+              ("Initializing Corbado session")
               setSession(new Corbado.Session(projectID));
           })
           .catch(err => {
-              console.log(err);
           });
   }, [])
 
@@ -47,9 +46,6 @@ export default function SignIn(
 
   return (
     <>
-        {/*das nicht in einen zentralen Header packen?*/}
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></link>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <div className="parent">
       <div className="buttons">
       {providersNew.map((provider) => (
