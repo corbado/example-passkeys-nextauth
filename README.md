@@ -1,6 +1,6 @@
-# Passkey integration example for NextAuth.js
+# NextAuth.js Passkey Integration Example
 
-This is a sample implementation of a NextAuth.js application that offers passkey authentication. For simple passkey-first authentication, the Corbado web component is used.
+This is a sample implementation of a NextAuth.js application that offers passkey authentication. For simple passkey-first authentication, Corbado's [passkey association approach](https://docs.corbado.com/products/corbado-connect/connect-via-passkey-association) is used.
 
 ## File structure
 
@@ -14,7 +14,7 @@ This is a sample implementation of a NextAuth.js application that offers passkey
 |   |   
 |   ├── auth
 |   |   ├── redirect.tsx            # Page where the user gets redirected to by Corbado after authentication
-|   |   └── signin.tsx              # Sign in page which also contains the Corbado web component
+|   |   └── signin.tsx              # Sign in page which also contains the Corbado login web component
 |   |
 |   └── index.tsx                   # Main page which is shown when no path is given
 |
