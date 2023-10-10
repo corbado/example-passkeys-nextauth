@@ -11,7 +11,7 @@ module.exports = (phase, { defaultConfig }) => {
     webpack: (config) => {
       config.resolve = {
         ...config.resolve,
-        fallbaPck: {
+        fallback: {
           fs: false,
           path: false,
           os: false,
