@@ -41,13 +41,15 @@ export const authOptions: NextAuthOptions = {
       async authorize(cred, req) {
         if(cred.provider !== "corbado") return null;
 
-        // das ist aus dem Node.js SDK rauskopiert oder?
-        // weil ggf. kurze Erklärung in den Comments, was hier passiert gut wäre
+        // Get the token from the cookie
         var cbo_short_session = req.headers.cookie.split("; ").find(row => row.startsWith("cbo_short_session"));
         var token = cbo_short_session.split("=")[1];
+
+        // Get the JWKS URL from the project ID
         var issuer = "https://" + projectID + ".frontendapi.corbado.io";
         var jwksUrl = issuer + "/.well-known/jwks"; 
 
+        // Initialize the JWKS client
         const JWKS = jose.createRemoteJWKSet(new URL(jwksUrl), {
           cacheMaxAge: 10 * 60 * 1000
         })
@@ -55,10 +57,13 @@ export const authOptions: NextAuthOptions = {
             issuer: issuer,
         }
         try {
+
+        // Verify the token
             const {payload} = await jose.jwtVerify(token, JWKS, options)
             if (payload.iss === issuer) {
-              //Load data from database
-              // Von der User database right?
+
+              //
+              //Next steps: Load data from database here to always have all the data available in the session
               return { email: payload.email, name: payload.name, image: null};
             }else{
               console.log("issuer not valid")

@@ -8,6 +8,8 @@ import { useCallback, useEffect, useState } from "react";
 
 import '@corbado/webcomponent/pkg/auth_cui.css'
 
+const projectID = process.env.CORBADO_PROJECT_ID;
+
 export default function SignIn( 
    { providers }: InferGetServerSidePropsType<typeof getServerSideProps>,  req: NextApiRequest,
    res: NextApiResponse) {
@@ -28,8 +30,7 @@ export default function SignIn(
               const Corbado = module.default || module;
 
               console.log("Initializing Corbado session")
-              // bitte über .env File beziehen
-              setSession(new Corbado.Session("pro-2808756695548043260"));
+              setSession(new Corbado.Session(projectID));
           })
           .catch(err => {
               console.log(err);
@@ -59,12 +60,10 @@ export default function SignIn(
         </div>
       ))}
       </div>
-      <div>
-          {/*aus .env File holen*/}
-        <corbado-auth project-id="pro-2808756695548043260" conditional="yes">
-          <input name="username" id="corbado-username"
-          required autoComplete="webauthn"/>
-        </corbado-auth>
+      <div className="associate-container">
+
+      <corbado-passkey-associate-login 
+            project-id={projectID}/>
       </div>
       </div>
       <style jsx>{`
@@ -84,6 +83,13 @@ export default function SignIn(
           display: block;
           border-radius: 30px;
           background-color: #1853FE;
+        }
+
+        .associate-container {
+          width: 200px;
+          margin-left: auto;
+          margin-right: auto;
+          align-items: center;
         }
       `}</style>
     </>
