@@ -2,6 +2,8 @@
 
 This is a sample implementation of a NextAuth.js application that offers passkey authentication. For simple passkey-first authentication, Corbado's [passkey association approach](https://docs.corbado.com/products/corbado-connect/connect-via-passkey-association) is used.
 
+Please see the [full blog post](https://www.corbado.com/blog/passkeys-nextauth) to understand the detailed steps needed to integrate passkeys with NextAuth.js.
+
 ## File structure
 
 ```
