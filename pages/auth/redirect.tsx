@@ -3,10 +3,6 @@ import { getProviders, signIn } from "next-auth/react"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../api/auth/[...nextauth]";
 
-// bitte über zentrale .env File beziehen
-const projectID = "pro-2808756695548043260";
-console.log("Project ID: ", projectID)
-
 
 export default function Redirect( 
    { providers }: InferGetServerSidePropsType<typeof getServerSideProps>,  req: NextApiRequest,

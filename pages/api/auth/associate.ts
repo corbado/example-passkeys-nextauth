@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next"
 
 // sind nicht im passenden .env Example
 const projectID = process.env.CORBADO_PROJECT_ID;
-const apiSecret = process.env.API_SECRET;
+const apiSecret = process.env.CORBADO_API_SECRET;
 
 
 export default async function handler(

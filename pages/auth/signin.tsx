@@ -8,6 +8,8 @@ import { useCallback, useEffect, useState } from "react";
 
 import '@corbado/webcomponent/pkg/auth_cui.css'
 
+const projectID = process.env.CORBADO_PROJECT_ID;
+
 export default function SignIn( 
    { providers }: InferGetServerSidePropsType<typeof getServerSideProps>,  req: NextApiRequest,
    res: NextApiResponse) {
@@ -27,12 +29,10 @@ export default function SignIn(
           .then(module => {
               const Corbado = module.default || module;
 
-              console.log("Initializing Corbado session")
-              // bitte über .env File beziehen
-              setSession(new Corbado.Session("pro-2808756695548043260"));
+              ("Initializing Corbado session")
+              setSession(new Corbado.Session(projectID));
           })
           .catch(err => {
-              console.log(err);
           });
   }, [])
 
@@ -46,9 +46,6 @@ export default function SignIn(
 
   return (
     <>
-        {/*das nicht in einen zentralen Header packen?*/}
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></link>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <div className="parent">
       <div className="buttons">
       {providersNew.map((provider) => (
@@ -59,12 +56,10 @@ export default function SignIn(
         </div>
       ))}
       </div>
-      <div>
-          {/*aus .env File holen*/}
-        <corbado-auth project-id="pro-2808756695548043260" conditional="yes">
-          <input name="username" id="corbado-username"
-          required autoComplete="webauthn"/>
-        </corbado-auth>
+      <div className="associate-container">
+
+      <corbado-passkey-associate-login 
+            project-id={projectID}/>
       </div>
       </div>
       <style jsx>{`
@@ -84,6 +79,13 @@ export default function SignIn(
           display: block;
           border-radius: 30px;
           background-color: #1853FE;
+        }
+
+        .associate-container {
+          width: 200px;
+          margin-left: auto;
+          margin-right: auto;
+          align-items: center;
         }
       `}</style>
     </>
